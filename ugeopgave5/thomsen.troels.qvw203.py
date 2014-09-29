@@ -29,8 +29,8 @@ def find_unique(xl):
             if e in le:
                 raise Exception("Non-unique list structure")
             if e not in rl:
-                rl.append(e)
-            le.append(e)
+                rl += [e]
+            le += [e]
     return rl
 
 
