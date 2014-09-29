@@ -10,7 +10,8 @@ def is_BS(xl):
     tmpxrr = copy.deepcopy(xl)
     if not unique_pairs(tmpxrr):
         return False
-    return xl
+
+    return True
 
 
 def unique_pairs(xrr):
@@ -40,6 +41,7 @@ if "__main__":
     b3 = [["a", "b"], ["a", "c", "f"], ["a", "d", "e"], ["b", "c", "e"], ["b", "d", "f"], ["c", "d"], ["e", "f"]]
     b4 = [["a", "b", "c"], ["a", "b", "d"], ["a", "e", "f"], ["b", "e", "f"], ["c", "d", "e"], ["c", "d", "f"]]
     b5 = [[0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8], [1, 5, 6], [2, 3, 7], [0, 5, 7], [1, 3, 8], [2, 4, 6]]
+
     print is_BS(b1)
     print is_BS(b2)
     print is_BS(b3)
