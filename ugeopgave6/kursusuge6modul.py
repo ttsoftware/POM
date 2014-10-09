@@ -85,6 +85,6 @@ class visLife(object):
                 self.canvas.update()
                 self.canvas.delete("all")
                 self.calc_scale(self.naeste())
-                time.sleep(1)
+                time.sleep(0.2)
             except TclError:
                 break

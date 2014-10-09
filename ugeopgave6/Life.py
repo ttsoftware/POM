@@ -1,34 +1,50 @@
+# -*- coding: utf-8 -*-
+"""
+    Vi har valgt at
+"""
+
+
 class Life:
     state = {}
+    init_alive = []
 
     imin = 0
     imax = 0
     jmin = 0
     jmax = 0
 
-    def __init__(self, imin, imax, jmin, jmax):
+    def __init__(self, imin, imax, jmin, jmax, init_alive):
+        """
+        Initialize the static grid, and define which nodes are alive initially
+        :param imin:
+        :param imax:
+        :param jmin:
+        :param jmax:
+        :param init_alive:
+        """
         self.imin = imin
         self.imax = imax
         self.jmin = jmin
         self.jmax = jmax
+        self.init_alive = init_alive
 
     def foerste(self):
         """
+        Modifies the state to reflect self.init_alive.
+        Returns the static grid.
         :return:
         """
         for i in range(self.imin, self.imax):
             for j in range(self.jmin, self.jmax):
                 self.state[(i, j)] = False
-
-                if (i, j) in [(10, 6), (10, 7), (10, 8), (9, 8), (8, 7)]:
+                if (i, j) in self.init_alive:
                     self.state[(i, j)] = True
-                #if (i, j) in [(0, 0), (0, 1), (1, 0)]:
-                #    self.state[(i, j)] = True
-
         return self.imin, self.imax, self.jmin, self.jmax
 
     def naeste(self):
         """
+        Modifies the state and kills/revives according to the two given rules
+        Returns the static grid
         :return:
         """
         next_state = {}
@@ -51,6 +67,7 @@ class Life:
                     # survice next state
                     next_state[(i, j)] = True
                 else:
+                    # die if no rule applies
                     next_state[(i, j)] = False
 
         self.state = next_state
@@ -59,6 +76,7 @@ class Life:
 
     def levende(self, i, j):
         """
+        Returns whether or not the given node (i,j) is alive
         :return:
         """
         return self.state[(i, j)]
