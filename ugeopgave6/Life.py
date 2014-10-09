@@ -1,6 +1,9 @@
 # -*- coding: utf-8 -*-
 """
-    Vi har valgt at
+    Vi har valgt at lave et statisk grid som ikke ændrer sig,
+    da vi vurderede at dette var den næmmeste løsning.
+
+    Vi repræsenterer vores nodes i variablen state, som er en dictionary med (i, j) tupler som nøgler, og booleans som værdier
 """
 
 
