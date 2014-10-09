@@ -20,10 +20,10 @@ class Life:
             for j in range(self.jmin, self.jmax):
                 self.state[(i, j)] = False
 
-                # if (i, j) in [(10, 6), (10, 7), (10, 8), (9, 8), (9, 9), (8, 8), (8, 7)]:
-                #    self.state[(i, j)] = True
-                if (i, j) in [(0, 0), (0, 1), (1, 0)]:
+                if (i, j) in [(10, 6), (10, 7), (10, 8), (9, 8), (8, 7)]:
                     self.state[(i, j)] = True
+                #if (i, j) in [(0, 0), (0, 1), (1, 0)]:
+                #    self.state[(i, j)] = True
 
         return self.imin, self.imax, self.jmin, self.jmax
 
@@ -44,21 +44,16 @@ class Life:
                     if self.state[(x, y)]:
                         edges_alive += 1
 
-                print self.state
-                print edges_alive
-
                 if edges_alive in [2, 3] and self.state[(i, j)]:
                     # survive next state
                     next_state[(i, j)] = True  # Should already be True?
-                elif not edges_alive and edges_alive is 3:
+                elif edges_alive is 3 and not self.state[(i, j)]:
                     # survice next state
                     next_state[(i, j)] = True
                 else:
                     next_state[(i, j)] = False
 
         self.state = next_state
-
-        print self.state
 
         return self.imin, self.imax, self.jmin, self.jmax
 
@@ -85,11 +80,8 @@ class Life:
             (i + 1, j),
             (i - 1, j - 1),
             (i, j - 1),
-            (i - 1, j - 1)
+            (i + 1, j - 1)
         ]
-
-        print (i, j)
-        print potential_edges
 
         real_edges = []
         for x, y in potential_edges:
@@ -97,7 +89,5 @@ class Life:
                     and self.jmax > y >= self.jmin\
                     and (x, y) not in real_edges:
                 real_edges += [(x, y)]
-
-        print real_edges
 
         return real_edges
