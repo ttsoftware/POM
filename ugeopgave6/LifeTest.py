@@ -1,4 +1,5 @@
 from unittest import TestCase
+import unittest
 from Life import Life
 from kursusuge6modul import visLife
 
@@ -18,7 +19,6 @@ class LifeTest(TestCase):
              (0, 9), (0, 8), (0, 7)]
 
     def test_foerste(self):
-
         l = Life(0, 20, 0, 20, self.alive)
         xmin, xmax, ymin, ymax = l.foerste()
 
@@ -28,7 +28,6 @@ class LifeTest(TestCase):
         self.assertEqual(xmax, 20)
 
     def test_naeste(self):
-
         l = Life(0, 20, 0, 20, self.alive)
         l.foerste()
         xmin, xmax, ymin, ymax = l.naeste()
@@ -39,7 +38,6 @@ class LifeTest(TestCase):
         self.assertEqual(xmax, 20)
 
     def test_levende(self):
-
         l = Life(0, 20, 0, 20, self.alive)
         l.foerste()
 
@@ -52,5 +50,12 @@ class LifeTest(TestCase):
         self.assertEqual(l.find_edges(0, 0), [(0, 1), (1, 1), (1, 0)])
 
     def test_integration(self):
+        l = Life(0, 20, 0, 20, [(10, 6), (10, 7), (10, 8), (9, 8), (8, 7)])
+        visLife(l.foerste, l.naeste, l.levende)
+
         l = Life(0, 20, 0, 20, self.alive)
         visLife(l.foerste, l.naeste, l.levende)
+
+
+if __name__ == '__main__':
+    unittest.main()
