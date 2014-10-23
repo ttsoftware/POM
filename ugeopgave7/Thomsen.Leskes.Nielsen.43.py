@@ -24,6 +24,7 @@ def rIntMid(f, a, b, n):
     return Esum
 
 
+
 if __name__ == "__main__":
     n = 1000
     a_f, b_f = (0, 2*math.pi)
@@ -45,8 +46,15 @@ if __name__ == "__main__":
     rintmidf = rIntMid(f, a_f, b_f, n)
     rintmidoe = rIntMid(oe, a_oe, b_oe, n)
     rintmidg = rIntMid(g, a_g, b_g, n)
+
+def genplotvalues(n):
+    vals = []
+    for i in range(0, n):
+        vals.append(rint)
+
+
     n = range(n)
 
-    plt.plot(n, rintmidoe, "g^", n, rintmidoe, "g--", n, rintmidoe, "go", n, rintmidoe, "r^", n, rintmidoe, "r--", n, rintmidg, "ro")
+    plt.plot(n, rintf, "g--", n, rintoe, "go", n, rintg, "g^", n, rintmidf, "r^", n, rintmidoe, "r--", n, rintmidg, "ro")
     plt.ylabel('some numbers')
     plt.show()
