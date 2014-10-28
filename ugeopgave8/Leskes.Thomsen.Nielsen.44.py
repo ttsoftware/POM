@@ -18,8 +18,8 @@ def gradientx(v):
     for i in range(n):
         vDx.append([])
         for j in range(n):
-            if j < n-1:
-                vDx[i].append(v[i-1][j] - v[i-1][j-1])
+            if j < n - 1:
+                vDx[i].append(v[i - 1][j] - v[i - 1][j - 1])
             else:
                 vDx[i].append(0.0)
     return vDx
@@ -31,8 +31,8 @@ def gradienty(v):
     for i in range(n):
         vDy.append([])
         for j in range(n):
-            if j < n-1:
-                vDy[i].append(v[i][j-1] - v[i-1][j-1])
+            if j < n - 1:
+                vDy[i].append(v[i][j - 1] - v[i - 1][j - 1])
             else:
                 vDy[i].append(0.0)
     return vDy
@@ -45,38 +45,43 @@ def norm(vDx, vDy):
         for i in range(n):
             normen.append([])
             for j in range(n):
-                normen[i].append(math.sqrt(vDx[i][j]**2 + vDy[i][j]**2))
+                normen[i].append(math.sqrt(vDx[i][j] ** 2 + vDy[i][j] ** 2))
     return normen
 
 
 def divergens(vDx, vDy):
     n = len(vDx)
     divv = []
+
     if len(vDx) == len(vDy):
+
         for i in range(n):
             divv.append([])
+
             for j in range(n):
                 divi = None
                 divj = None
-                if (1 < i < n-1):
-                    divi = vDx[i][j] - vDx[i-1][j]
-                elif (i == 1):
+
+                if 1 < i < n - 1:
+                    divi = vDx[i][j] - vDx[i - 1][j]
+                elif i == 1:
                     divi = vDx[i][j]
                 else:
-                    divi = -vDx[i-1][j]
+                    divi = -vDx[i - 1][j]
 
-                if (1 < j < n-1):
-                    divj = vDy[i][j] - vDy[i-1][j]
-                elif (j == 1):
+                if 1 < j < n - 1:
+                    divj = vDy[i][j] - vDy[i - 1][j]
+                elif j == 1:
                     divj = vDy[i][j]
                 else:
-                    divj = -vDy[i-1][j]
+                    divj = -vDy[i - 1][j]
+
                 divv[i].append(divi + divj)
     return divv
 
 
 def smoothenimage(filename):
-    if (filename.split(".")[1] == "csv"):
+    if filename.split(".")[1] == "csv":
         imagelist = csvImageRead(filename)
         tau = 0.248
         regulate = 0.08
@@ -85,7 +90,7 @@ def smoothenimage(filename):
 if __name__ == "__main__":
     imagelist = csvImageRead("Cameraman.csv")
     imagelistnoise = csvImageRead("CameramanNoisy.csv")
-    #plt.imshow(imagelist, cmap="Greys_r")
+    # plt.imshow(imagelist, cmap="Greys_r")
 
     gradx = gradientx(imagelist)
     #print gradx
