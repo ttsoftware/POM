@@ -82,10 +82,21 @@ def divergens(vDx, vDy):
 
 def smoothenimage(filename):
     if filename.split(".")[1] == "csv":
+        # 1) Indlæser billede
         imagelist = csvImageRead(filename)
+        # 2) Sætter tau = 0.248 og lambda = 0.08
         tau = 0.248
         regulate = 0.08
-
+        # 3) laver 2 NxN billeder, w1 og w2
+        w1 = []
+        for i in range(0, len(imagelist)):
+            w1.append([])
+            for j in range(0, len(imagelist)):
+                w1[i].append(0)
+        w2 = w1
+        divW = divergens(w1, w2)
+        # 4) 
+        ylamda = []
 
 if __name__ == "__main__":
     imagelist = csvImageRead("Cameraman.csv")
@@ -104,5 +115,6 @@ if __name__ == "__main__":
     diver = divergens(grady, gradx)
     #print len(norm)
 
+    smoothenimage("CameramanNoisy.csv")
     plt.imshow(norm, cmap="Greys_r")
     plt.show()
