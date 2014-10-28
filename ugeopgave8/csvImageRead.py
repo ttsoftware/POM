@@ -23,11 +23,11 @@ def csvImageRead(sFileName):
             return mImageList
 
     except IOError as e:
-        print u"Der er opstået en fejl! Findes filen?"
-        print e
+        print(u"Der er opstået en fejl! Findes filen?")
+        print(e)
     finally:
         return mImageList
 
 if __name__ == "__main__":
     #Tester om metoden håndtere ikke-eksisterende file
-    print csvImageRead("Findes_ikke.csv")
+    print(csvImageRead("Findes_ikke.csv"))
