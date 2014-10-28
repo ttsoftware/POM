@@ -83,7 +83,7 @@ def grafic(n):
     plt.show()
 
 print 'r_int(f, 0, 2 * pi, 50) = 0.0', r_int(fun_f, 0, 2 * math.pi, 50) - 0.0 < epsilon
-print 'r_int(phi, -10, 10, 50) = 1.0', r_int(fun_phi, -10, 10, 50) - 1.0 < epsilon
+print 'r_int(phi, -10, 10, 50) = 1.0', r_int(fun_phi, float("-inf"), float("inf"), 50) - 1.0 < epsilon
 print 'r_int(g, 0.001, 10, 50) = 2.6335682009', r_int(fun_g, 0.001, 10, 50) - 2.6335682009 < epsilon
 print 'r_int_mid(f, 0, 2 * pi, 50) = 0.0', r_int_mid(fun_f, 0, 2 * math.pi, 50) - 0.0 < epsilon
 print 'r_int_mid(phi, -10, 10, 50) = 1.0', r_int_mid(fun_phi, -10, 10, 50) - 1.0 < epsilon
