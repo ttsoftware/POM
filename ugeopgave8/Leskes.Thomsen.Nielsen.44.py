@@ -1,9 +1,7 @@
 # -*- coding: utf-8 -*-
-from __future__ import division
 import math
 import matplotlib.pyplot as plt
 from csvImageRead import *
-import numpy as np
 
 
 def f(x, y):
