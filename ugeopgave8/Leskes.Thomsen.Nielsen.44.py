@@ -96,7 +96,10 @@ def smoothenimage(filename):
         w2 = w1
         divW = divergens(w1, w2)
         # 4) 
-        ylamda = []
+        ylambda = imagelist.__imul__(regulate)
+        print(imagelist)
+        print(ylambda)
+
 
 if __name__ == "__main__":
     imagelist = csvImageRead("Cameraman.csv")
@@ -115,6 +118,6 @@ if __name__ == "__main__":
     diver = divergens(grady, gradx)
     #print len(norm)
 
-    smoothenimage("CameramanNoisy.csv")
-    plt.imshow(norm, cmap="Greys_r")
+    #smoothenimage("CameramanNoisy.csv")
+    plt.imshow(imagelist, cmap="Greys_r")
     plt.show()
