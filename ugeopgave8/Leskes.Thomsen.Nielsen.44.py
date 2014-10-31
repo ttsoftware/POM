@@ -7,15 +7,22 @@ import numpy as np
 from csvImageRead import *
 from operator import sub
 
-def f(x, y):
-    return x ** 2 + y ** 2
-
 
 def gradient(v):
+    """
+    Udregner de to gradienter
+    :param v:
+    :return:
+    """
     return gradientx(v), gradienty(v)
 
 
 def gradientx(v):
+    """
+    udregner gradienten i forhold til x
+    :param v:
+    :return:
+    """
     n = len(v)
     vDx = []
     for i in xrange(n):
@@ -29,6 +36,11 @@ def gradientx(v):
 
 
 def gradienty(v):
+    """
+    Udregner gradienten i forhold til y
+    :param v:
+    :return:
+    """
     n = len(v)
     vDy = []
     for i in xrange(n):
@@ -42,6 +54,12 @@ def gradienty(v):
 
 
 def gradNorm(vDx, vDy):
+    """
+    Udregner normen af to gradienter og returnerer denne
+    :param vDx:
+    :param vDy:
+    :return:
+    """
     n = len(vDx)
     normen = []
     if len(vDx) == len(vDy):
@@ -53,6 +71,12 @@ def gradNorm(vDx, vDy):
 
 
 def divergens(vDx, vDy):
+    """
+    Finder kontrasten mellem de to gradienter til en given indgang og returnerer denne
+    :param vDx:
+    :param vDy:
+    :return:
+    """
     n = len(vDx)
     divv = []
 
@@ -82,6 +106,12 @@ def divergens(vDx, vDy):
 
 
 def smoothenimage(filename):
+    """
+    Støj-reducerer et givent billede fra en csv-fil.
+    Den benytter sig af gradient-descent metoden til at gøre dette.
+    :param filename:
+    :return:
+    """
     if filename.split(".").pop() == "csv":
         # 1) Indlæser billede
         imagelist = csvImageRead(filename)
@@ -149,6 +179,12 @@ def smoothenimage(filename):
 
 
 def subtracter(v, w):
+    """
+    Trækker en matrice, v, fra en anden matrice, w, ved at trækker hver indgang i w fra den tilsvarende indgang i v
+    :param v:
+    :param w:
+    :return:
+    """
     sub = []
     for i in xrange(len(v)):
         sub.append([])
@@ -158,6 +194,12 @@ def subtracter(v, w):
     return sub
 
 def regulater(v, regulation):
+    """
+    Tager en matrice v og ganger regulation ind på hver indgang.
+    :param v:
+    :param regulation:
+    :return:
+    """
     regulated = []
     for i in xrange(len(v)):
         regulated.append([])
@@ -168,20 +210,15 @@ def regulater(v, regulation):
 if __name__ == "__main__":
     imagelist = csvImageRead("Cameraman.csv")
     imagelistnoise = csvImageRead("CameramanNoisy.csv")
-    #print imagelistnoise
-    # plt.imshow(imagelist, cmap="Greys_r")
+    #plt.imshow(imagelist, cmap="Greys_r")
 
     gradx = gradientx(imagelist)
-    # print gradx
 
     grady = gradienty(imagelist)
-    #print grady
 
     norm = gradNorm(grady, gradx)
-    #print len(norm)
 
     diver = divergens(grady, gradx)
-    #print len(norm)
 
     smoothim = smoothenimage("CameramanNoisy.csv")
     #print smoothim
