@@ -1,0 +1,36 @@
+\documentclass[12pt, a4paper]{article}
+\usepackage[margin=1.0 in]{geometry}
+\addtolength{\topmargin}{.25in}
+\usepackage[utf8]{inputenc}  
+\usepackage{amsmath}
+\usepackage[danish]{babel}
+\usepackage{calc}
+\usepackage{array}
+\usepackage{amssymb}
+%\usepackage{tikz}
+\usepackage{graphicx}
+\newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
+\usepackage{hyperref}
+\newcommand{\Green}{\tikz\draw[green,fill=green] (0,0) circle (1 ex);}
+\newcommand{\Lime }{\tikz\draw[brown,fill=brown] (0,0) circle (1 ex);}
+\newcommand{\Blue}{\tikz\draw[blue,fill=blue] (0,0) circle (1 ex);}
+\newcommand{\Yellow}{\tikz\draw[yellow,fill=yellow] (0,0) circle (1 ex);}
+\newcommand{\Red}{\tikz\draw[red,fill=red] (0,0) circle (1 ex);}
+\renewcommand*\contentsname{Indholdsfortegnelse}
+%\usepackage{cleveref}
+
+%\crefformat{footnote}{#2\footnotemark[#1]#3}
+
+\setlength\parindent{0pt}		% noindent through whole document
+\usepackage[parfill]{parskip}	% extra linebreak on new paragraph
+\begin{document}
+\section*{Gruppeaflevering}
+\section*{Gradient billeder}
+Ved udregning af gradienter på billedet uden støj, fåes følgende gradient billeder:
+\begin{figure}[h!]
+  \caption{Billede af Gradient-y}
+  \centering
+	\includegraphics[scale=0.5]{grady}
+\end{figure}
+\includegraphics[scale=0.5]{grady}
+\end{document}

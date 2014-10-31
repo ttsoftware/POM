@@ -56,28 +56,27 @@ def divergens(vDx, vDy):
     n = len(vDx)
     divv = []
 
-    if len(vDx) == len(vDy):
-        for i in xrange(n):
-            divv.append([])
-            for j in xrange(n):
-                divi = None
-                divj = None
+    for i in xrange(n):
+        divv.append([])
+        for j in xrange(n):
+            divi = None
+            divj = None
 
-                if 0 < i < n - 1:
-                    divi = vDx[i][j] - vDx[i - 1][j]
-                elif i == 0:
-                    divi = vDx[i][j]
-                else:
-                    divi = -vDx[i - 1][j]
+            if 0 < i < n - 1:
+                divi = vDx[i][j] - vDx[i - 1][j]
+            elif i == 0:
+                divi = vDx[i][j]
+            else:
+                divi = -vDx[i - 1][j]
 
-                if 0 < j < n - 1:
-                    divj = vDy[i][j] - vDy[i][j - 1]
-                elif j == 0:
-                    divj = vDy[i][j]
-                else:
-                    divj = -vDy[i][j - 1]
+            if 0 < j < n - 1:
+                divj = vDy[i][j] - vDy[i][j - 1]
+            elif j == 0:
+                divj = vDy[i][j]
+            else:
+                divj = -vDy[i][j - 1]
 
-                divv[i].append(divi + divj)
+            divv[i].append(divi + divj)
 
     return divv
 
@@ -90,7 +89,7 @@ def smoothenimage(filename):
 
         # 2) Sætter tau = 0.248 og lambda = 0.08
         tau = 0.248
-        regulate = 0.05
+        regulate = 0.09
 
         # 3) laver 2 NxN billeder, w1 og w2
         w1 = []
@@ -105,7 +104,7 @@ def smoothenimage(filename):
 
         sumofimage = []
         # 5) Itererer (dog kun 10 gange
-        for i in xrange(30):
+        for i in xrange(20):
 
             # 5.1) beregner gradienterne
             y1, y2 = (gradient(ylambda))
@@ -119,8 +118,8 @@ def smoothenimage(filename):
             # 5.3) Foretager descent-skridt
             for i in xrange(lenn):
                 for j in xrange(lenn):
-                    w1[i][j] = w1[i][j] - dwnorm[i][j] * tau
-                    w2[i][j] = w2[i][j] - dwnorm[i][j] * tau
+                    w1[i][j] = w1[i][j] - dwx[i][j] * tau
+                    w2[i][j] = w2[i][j] - dwy[i][j] * tau
                     w1[i][j] = w1[i][j] / (1 + dwnorm[i][j] * tau)
                     w2[i][j] = w2[i][j] / (1 + dwnorm[i][j] * tau)
 
@@ -134,8 +133,8 @@ def smoothenimage(filename):
                     sumis += 0.5 * (ylambda[i][j] - divW[i][j])**2
             sumofimage.append(sumis)
 
+        plt.figure("energi")
         plt.plot(sumofimage, "b")
-        plt.show()
 
         x = []
         for i in xrange(lenn):
@@ -159,11 +158,12 @@ def subtracter(v, w):
     return sub
 
 def regulater(v, regulation):
-
+    regulated = []
     for i in xrange(len(v)):
+        regulated.append([])
         for j in xrange(len(v)):
-            v[i][j] = v[i][j] * regulation
-    return v
+            regulated[i].append(v[i][j] * regulation)
+    return regulated
 
 if __name__ == "__main__":
     imagelist = csvImageRead("Cameraman.csv")
@@ -183,18 +183,20 @@ if __name__ == "__main__":
     diver = divergens(grady, gradx)
     #print len(norm)
 
-    smoothim =  smoothenimage("CameramanNoisy.csv")
-    print smoothim[0]
+    smoothim = smoothenimage("CameramanNoisy.csv")
+    #print smoothim
     plt.figure("smoothim")
     plt.imshow(smoothim, cmap="Greys_r")
-    #plt.figure("grady")
-    #plt.imshow(grady, cmap="Greys_r")
-    #plt.figure("gradx")
-    #plt.imshow(gradx, cmap="Greys_r")
-    #plt.figure("norm")
-    #plt.imshow(norm, cmap="Greys_r")
-    #plt.figure("diver")
-    #plt.imshow(diver, cmap="Greys_r")
+    plt.figure("grady")
+    plt.imshow(grady, cmap="Greys_r")
+    plt.figure("gradx")
+    plt.imshow(gradx, cmap="Greys_r")
+    plt.figure("norm")
+    plt.imshow(norm, cmap="Greys_r")
+    plt.figure("diver")
+    plt.imshow(diver, cmap="Greys_r")
     plt.figure("darealest")
     plt.imshow(imagelistnoise, cmap="Greys_r")
+    plt.figure("origin")
+    plt.imshow(imagelist, cmap="Greys_r")
     plt.show()
