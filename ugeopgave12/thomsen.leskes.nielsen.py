@@ -46,12 +46,6 @@ def u(x, t, c, k, h, l):
             ) + (2 * res[previous][i])
                        - res[previous_2][i]]
 
-    index_t = res.keys()[t-1]  # Vi kan ikke bruge vores t, fordi vi tager k skridt?
-                               # Ingen ved det. Jeg ved ikke hvad jeg laver
-                               # Alle k er løsninger til k
-                               # http://pygospasprofession.files.wordpress.com/2013/07/watman.jpg
-                               # http://img.1001mem.ru/posts/2891000/2890868.jpg
-
     # vi har x'er ud af x-aksen
     # vi har u(x, t) op af y-aksen? Det er jeg ret sikker på
     # synes i det ser godt ud?
@@ -68,6 +62,11 @@ def u(x, t, c, k, h, l):
 
     plt.show()
 
+    index_t = res.keys()[t-1]  # Vi kan ikke bruge vores t, fordi vi tager k skridt?
+                               # Ingen ved det. Jeg ved ikke hvad jeg laver
+                               # Alle k er løsninger til k
+                               # http://pygospasprofession.files.wordpress.com/2013/07/watman.jpg
+                               # http://img.1001mem.ru/posts/2891000/2890868.jpg
     return res[index_t][x-1]
 
 # x  t  c  k  h  l
