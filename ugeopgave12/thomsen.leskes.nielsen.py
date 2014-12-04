@@ -72,7 +72,7 @@ def u(x, t, c, k, h, l):
 # x  t  c  k  h  l
 print u(5, 5, 1, 0.9, 0.9, 10)
 
-# Jeg regnede med at det ville blive præcis 0.00416544575484
+# Jeg ved hvad i tænker: Jeg regnede også med at det ville blive præcis 0.00416544575484
 
 # SHIP IIIIIT
 
