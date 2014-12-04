@@ -38,7 +38,7 @@ def gradienty(v):
     return vDy
 
 
-def norm(vDx, vDy):
+def gradNorm(vDx, vDy):
     n = len(vDx)
     normen = []
     if len(vDx) == len(vDy):
@@ -49,7 +49,7 @@ def norm(vDx, vDy):
     return normen
 
 
-def divergens(vDx, vDy):
+def divergence(vDx, vDy):
     n = len(vDx)
     divv = []
 
@@ -98,11 +98,11 @@ if __name__ == "__main__":
     grady = gradienty(imagelist)
     #print grady
 
-    norm = norm(grady, gradx)
+    norm = gradNorm(grady, gradx)
     #print len(norm)
 
-    diver = divergens(grady, gradx)
+    diver = divergence(grady, gradx)
     #print len(norm)
 
-    plt.imshow(norm, cmap="Greys_r")
+    plt.imshow(diver, cmap="Greys_r")
     plt.show()
