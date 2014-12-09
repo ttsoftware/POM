@@ -24,7 +24,7 @@ class RegressionTest(unittest.TestCase):
     def test_plot_regress(self):
         set = Dataset()
         set.read_data_points("flueaeg.txt")
-
+ 
         reg = Regression(set)
 
         f = reg.regress()
