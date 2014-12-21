@@ -58,6 +58,10 @@
 
 Regressionslinien viser resultatet fra funktionen \textit{linearAnalysis()} anvendt på datasættet \textit{flueaeg.txt}. Figuren illustrerer hvordan den lineære analyse passer med datasættet ved at være indsat i samme figur. Figurens akser er generet ud fra \textit{(x min , x max ), (f (x min ), f (x max ))}
 så samtlige punkter ingår i figuren. Regressionslinien passer ret præcist på punkterne, dermed er der en god sandsynlighed for at den er genereret korrekt. \\
-For at kører testene skal filen \textit{RegressionTest.py} køres, for at vise figuren skal testfilen køres endnu en gang. 
+For at kører testene skal filen \textit{RegressionTest.py} køres, for at vise figuren skal testfilen køres endnu en gang.\\
+
+Ved at bruge xmin, xmax, fmin og fmax til afgrænsning af plottet, kan vi lave et mere dynamisk plot som er i stand til at tilpasse sig når dataene ændrer sig.\\
+
+Vi har valgt at lave en hjælpefunktion regress i vores Regression klasse, som returnerer vores regressionsfunktion. Denne hjælpefunktion anvender vi til at finde punkterne på den linje vi gerne vil tegne i plottet.
 
 \end{document}

@@ -1,3 +1,4 @@
+# coding=utf-8
 import unittest
 import matplotlib.pyplot as plt
 import numpy as np
@@ -24,7 +25,7 @@ class RegressionTest(unittest.TestCase):
     def test_plot_regress(self):
         set = Dataset()
         set.read_data_points("flueaeg.txt")
- 
+
         reg = Regression(set)
 
         f = reg.regress()
@@ -42,6 +43,8 @@ class RegressionTest(unittest.TestCase):
         plt.plot(set.get_x_values(), set.get_y_values(), 'ro')
         plt.plot(xs, ys, 'b-')
         plt.axis([xmin, xmax, f_xmax, f_xmin])
+        plt.xlabel("Luftfugtighed")
+        plt.ylabel("Klaegningstid")
         plt.show()
 
 if __name__ == '__main__':
