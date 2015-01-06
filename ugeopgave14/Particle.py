@@ -10,10 +10,24 @@ class Particle(object):
 
     def __init__(self, positionx, positiony, velocityx, velocityy):
         self.position = Vector(vx=positionx, vy=positiony)
-        self.position = Vector(vx=velocityx, vy=velocityy)
+        self.velocity = Vector(vx=velocityx, vy=velocityy)
 
-    def step(self, delta_t):
-        self.position = Vector(
-            vx=self.position.vx + delta_t*self.velocity.vx,
-            vy=self.position.vy + delta_t*self.velocity.vy
+    def step(self):
+        return Vector(
+            vx=self.position.vx + 1*self.velocity.vx,
+            vy=self.position.vy + 1*self.velocity.vy
         )
+
+    def take_step(self, center, radius):
+        if not self.willcollide(center, radius):
+            print "we took a step jaaaa"
+            self.position = self.step()
+
+    def willcollide(self, center, radius):
+        next_position = self.step()
+
+        return len(
+            Vector(p1=center,
+                   p2=(next_position.vx, next_position.vy)
+            )
+        ) > radius

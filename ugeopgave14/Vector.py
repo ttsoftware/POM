@@ -51,3 +51,6 @@ class Vector(object):
         :return:
         """
         pass
+
+    def __str__(self):
+        return "(" + str(self.vx) + ", " + str(self.vy) + ")"
