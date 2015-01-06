@@ -8,10 +8,10 @@ class ContainerTest(unittest.TestCase):
 
         container = Container(radius=100, particle_count=1)
 
-        for t in range(0, 5):
+        for t in range(0, 10):
 
             for p in container.particles:
 
-                p.take_step(container.center, container.radius)
+                print "Particle: " + p.position.__str__() + ", " + p.velocity.__str__()
 
-                print p.position
+                p.take_step(container.center, container.radius)

@@ -9,3 +9,15 @@ class DatasetTest(unittest.TestCase):
         p = Particle(0, 0, 0, 0)
 
         print len(p.position)
+
+
+    def test_step(self):
+
+        p = Particle(
+            -40.9750481543,
+            88.6462764876,
+            -3.32917469238,
+            7.27437941461
+        )
+
+        p.take_step((0,0), 100)
