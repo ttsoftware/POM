@@ -37,6 +37,8 @@ class Particle(object):
             # we find the following equation by treating (p+v*u-c)^2 as a vector, and dotting it with itself.
             # we solve for u and insert our particle data
 
+            # TODO: Something is wrong here. We sometimes find a u outside of the barrier
+
             u1 = (-math.sqrt((-2 * cx * vx + 2 * px * vx + 2 * py * vy - 2 * vy * cy) ** 2 - 4 *
                             (vx ** 2 + vy ** 2) * (
             cx ** 2 - 2 * cx * px + px ** 2 - radius ** 2 + py ** 2 - 2 * py * cy + cy ** 2))
@@ -46,6 +48,9 @@ class Particle(object):
                             (vx ** 2 + vy ** 2) * (
             cx ** 2 - 2 * cx * px + px ** 2 - radius ** 2 + py ** 2 - 2 * py * cy + cy ** 2))
                   + 2 * cx * vx - 2 * px * vx - 2 * py * vy + 2 * vy * cy) / (2 * (vx ** 2 + vy ** 2))
+
+            u1 = abs(u1)
+            u2 = abs(u2)
 
             # u is chosen
             if 1 >= u1 > 0:
