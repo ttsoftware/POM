@@ -20,4 +20,8 @@ class DatasetTest(unittest.TestCase):
             7.27437941461
         )
 
+        print p.position, p.velocity
+
         p.take_step((0,0), 100)
+
+        print p.position, p.velocity

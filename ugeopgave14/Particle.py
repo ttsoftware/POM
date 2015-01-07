@@ -31,8 +31,11 @@ class Particle(object):
             vx = self.velocity.vx
             vy = self.velocity.vy
 
-            if vx**2 + vy**2 == 0:
+            if vx ** 2 + vy ** 2 == 0:
                 raise Exception("wat")
+
+            # we find this equation by treating (p+v*u-c)^2 as a vector, and dotting it with itself.
+            # we solve for u and insert our particle data
 
             u1 = (-0.5 * math.sqrt(
                 (-2 * cx * vx + 2 * px * vx + 2 * py * vy - 2 * vy * cy) ** 2 - 4 * (vx ** 2 + vy ** 2) * (
@@ -44,18 +47,42 @@ class Particle(object):
                     cx ** 2 - 2 * cx * px + px ** 2 - radius ** 2 + py ** 2 - 2 * py * cy + cy ** 2)
             ) + cx * vx - px * vx - py * vy + vy * cy) / (vx ** 2 + vy ** 2)
 
+            # u is chosen
             if 1 > u1 > 0:
                 u = u1
-            if 1 > u2 > 0:
+            elif 1 > u2 > 0:
                 u = u2
 
             print "U: " + str(u)
+
+            # pc and projection are position Vectors
+            pc = self.position + Vector(self.velocity.vx * u, self.velocity.vy * u)
+
+            projection = Vector(
+                px=center,
+                py=(pc.vx, pc.vy)
+            ).proj((self.position.vx, self.position.vy))
+
+            vp = Vector(
+                px=(self.position.vx, self.position.vy),
+                py=(projection.vx, projection.vy)
+            )
+            # p1'
+            p_1 = self.position + vp.scale(2 * vp.length)
+            # v2 is the vector from pc
+            v_2 = Vector(
+                px=(pc.vx, pc.vy),
+                py=(p_1.vx, p_1.vy)
+            ).scale(self.velocity.length)
+
+            self.velocity = v_2
+            self.position = pc + self.velocity.scale(1 - u)
 
     def willcollide(self, center, radius):
         next_position = self.step()
 
         return len(
-            Vector(p1=center,
-                   p2=(next_position.vx, next_position.vy)
+            Vector(px=center,
+                   py=(next_position.vx, next_position.vy)
             )
         ) > radius
