@@ -23,6 +23,9 @@ class Particle(object):
         if not self.willcollide(center, radius):
             self.position = self.step()
         else:
+
+            print "Collision"
+
             cx, cy = center
             u = 0.0
 
@@ -31,28 +34,27 @@ class Particle(object):
             vx = self.velocity.vx
             vy = self.velocity.vy
 
-            if vx ** 2 + vy ** 2 == 0:
-                raise Exception("We do not want to divide by zero")
-
-            # we find this equation by treating (p+v*u-c)^2 as a vector, and dotting it with itself.
+            # we find the following equation by treating (p+v*u-c)^2 as a vector, and dotting it with itself.
             # we solve for u and insert our particle data
 
-            u1 = (-0.5 * math.sqrt(
-                (-2 * cx * vx + 2 * px * vx + 2 * py * vy - 2 * vy * cy) ** 2 - 4 * (vx ** 2 + vy ** 2) * (
-                    cx ** 2 - 2 * cx * px + px ** 2 - radius ** 2 + py ** 2 - 2 * py * cy + cy ** 2)
-            ) + cx * vx - px * vx - py * vy + vy * cy) / (vx ** 2 + vy ** 2)
+            u1 = (-math.sqrt((-2 * cx * vx + 2 * px * vx + 2 * py * vy - 2 * vy * cy) ** 2 - 4 *
+                            (vx ** 2 + vy ** 2) * (
+            cx ** 2 - 2 * cx * px + px ** 2 - radius ** 2 + py ** 2 - 2 * py * cy + cy ** 2))
+                  + 2 * cx * vx - 2 * px * vx - 2 * py * vy + 2 * vy * cy) / (2 * (vx ** 2 + vy ** 2))
 
-            u2 = (0.5 * math.sqrt(
-                (-2 * cx * vx + 2 * px * vx + 2 * py * vy - 2 * vy * cy) ** 2 - 4 * (vx ** 2 + vy ** 2) * (
-                    cx ** 2 - 2 * cx * px + px ** 2 - radius ** 2 + py ** 2 - 2 * py * cy + cy ** 2)
-            ) + cx * vx - px * vx - py * vy + vy * cy) / (vx ** 2 + vy ** 2)
+            u2 = (math.sqrt((-2 * cx * vx + 2 * px * vx + 2 * py * vy - 2 * vy * cy) ** 2 - 4 *
+                            (vx ** 2 + vy ** 2) * (
+            cx ** 2 - 2 * cx * px + px ** 2 - radius ** 2 + py ** 2 - 2 * py * cy + cy ** 2))
+                  + 2 * cx * vx - 2 * px * vx - 2 * py * vy + 2 * vy * cy) / (2 * (vx ** 2 + vy ** 2))
 
             # u is chosen
-            if 1 > u1 > 0:
+            if 1 >= u1 > 0:
                 u = u1
-            elif 1 > u2 > 0:
+            elif 1 >= u2 > 0:
                 u = u2
             else:
+                print u1
+                print u2
                 raise Exception("Could not determine distance to barrier")
 
             # pc and projection are position Vectors
