@@ -10,7 +10,6 @@ class DatasetTest(unittest.TestCase):
 
         print len(p.position)
 
-
     def test_step(self):
 
         p = Particle(
@@ -23,17 +22,36 @@ class DatasetTest(unittest.TestCase):
         print p.position, p.velocity
 
         p.take_step((0, 0), 100)
-
-        print p.position, p.velocity
-
         p.take_step((0, 0), 100)
-
-        print p.position, p.velocity
-
         p.take_step((0, 0), 100)
         p.take_step((0, 0), 100)
         p.take_step((0, 0), 100)
         p.take_step((0, 0), 100)
 
         # we definetly moved away from the barrier
+        print p.position, p.velocity
+
+        p.take_step((0, 0), 100)
+        p.take_step((0, 0), 100)
+        p.take_step((0, 0), 100)
+        p.take_step((0, 0), 100)
+        p.take_step((0, 0), 100)
+        p.take_step((0, 0), 100)
+        p.take_step((0, 0), 100)
+        p.take_step((0, 0), 100)
+        p.take_step((0, 0), 100)
+        p.take_step((0, 0), 100)
+        p.take_step((0, 0), 100)
+        p.take_step((0, 0), 100)
+        p.take_step((0, 0), 100)
+        p.take_step((0, 0), 100)
+        p.take_step((0, 0), 100)
+        p.take_step((0, 0), 100)
+        p.take_step((0, 0), 100)
+        p.take_step((0, 0), 100)
+        p.take_step((0, 0), 100)
+        p.take_step((0, 0), 100)
+        p.take_step((0, 0), 100)
+
+        # we hit the barrier again!
         print p.position, p.velocity
