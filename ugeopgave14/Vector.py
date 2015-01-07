@@ -27,7 +27,7 @@ class Vector(object):
             self.vx = p2x - p1x
             self.vy = p2y - p1y
         else:
-            raise Exception("AAAAAAAAAAARRRRRRRRHGHHHHHHHHHHHHH")
+            raise Exception("Invalid parameters")
 
         self.length = np.sqrt(self.vx ** 2 + self.vy ** 2)
 

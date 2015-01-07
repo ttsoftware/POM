@@ -32,7 +32,7 @@ class Particle(object):
             vy = self.velocity.vy
 
             if vx ** 2 + vy ** 2 == 0:
-                raise Exception("wat")
+                raise Exception("We do not want to divide by zero")
 
             # we find this equation by treating (p+v*u-c)^2 as a vector, and dotting it with itself.
             # we solve for u and insert our particle data
@@ -52,8 +52,8 @@ class Particle(object):
                 u = u1
             elif 1 > u2 > 0:
                 u = u2
-
-            print "U: " + str(u)
+            else:
+                raise Exception("Could not determine distance to barrier")
 
             # pc and projection are position Vectors
             pc = self.position + Vector(self.velocity.vx * u, self.velocity.vy * u)
