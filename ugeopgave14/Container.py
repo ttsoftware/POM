@@ -32,3 +32,25 @@ class Container(object):
             )
 
             self.particles += [p]
+
+
+    def averageVelocity(self):
+
+        avgVelocity = 0
+
+        for particle in self.particles:
+            # use absolute value due to the
+            avgVelocity += math.sqrt(particle.velocity.vx**2 + particle.velocity.vy**2)
+
+        return avgVelocity / len(self.particles)
+
+
+    def pressure(self):
+
+        n = len(self.particles)
+        m = 1
+        v = self.averageVelocity()
+        a = math.pi * (self.radius**2)
+
+        pressure = (n * m * (v**2))/(2 * a)
+        return pressure

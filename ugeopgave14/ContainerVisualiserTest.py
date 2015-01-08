@@ -10,4 +10,4 @@ class ContainerVisualiserTest(unittest.TestCase):
         container = Container(radius=100, particle_count=10)
 
         visualiser = ContainerVisualiser(container)
-        visualiser.animate(100)
+        visualiser.animate(1000)

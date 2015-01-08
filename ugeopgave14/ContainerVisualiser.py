@@ -15,7 +15,7 @@ class ContainerVisualiser(object):
 
         for t in range(0, time_amount):
 
-            plt.clf()  # remove to see particle path
+#            plt.clf()  # remove to see particle path
 
             barrier = plt.Circle(xy=(0, 0), radius=self.container.radius, color='r', fill=False)
             fig.gca().add_artist(barrier)
