@@ -5,6 +5,7 @@ import math
 
 
 class Particle(object):
+
     position = None
     velocity = None
     mass = 10 ** -23
@@ -15,12 +16,23 @@ class Particle(object):
         self.velocity = Vector(vx=velocityx, vy=velocityy)
 
     def step(self):
+        """
+        Return the position the particle would have in the next t
+        :return:
+        """
         return Vector(
             vx=self.position.vx + 1 * self.velocity.vx,
             vy=self.position.vy + 1 * self.velocity.vy
         )
 
     def take_step(self, center, radius):
+        """
+        Move the particle in to its position for next t
+        Handles collision with container wall
+        :param center:
+        :param radius:
+        :raise Exception:
+        """
         if not self.willcollide(center, radius):
             self.position = self.step()
         else:
@@ -37,8 +49,6 @@ class Particle(object):
 
             # we find the following equation by treating (p+v*u-c)^2 as a vector, and dotting it with itself.
             # we solve for u and insert our particle data
-
-            # TODO: Something is wrong here. We sometimes find a u outside of the barrier
 
             u1 = (-math.sqrt((-2 * cx * vx + 2 * px * vx + 2 * py * vy - 2 * vy * cy) ** 2 - 4 *
                             (vx ** 2 + vy ** 2) * (
@@ -61,7 +71,7 @@ class Particle(object):
             else:
                 print u1
                 print u2
-                raise Exception("Could not determine distance to barrier")
+                raise Exception("Could not determine distance to barrier. Particle has possibly slipped outside the container.")
 
             # pc and projection are position Vectors
             pc = self.position + Vector(self.velocity.vx * u, self.velocity.vy * u)
@@ -86,9 +96,15 @@ class Particle(object):
             self.velocity = v_2
 
             self.scale_for_temp()
-            self.position = pc + self.velocity.scale(1 - u)
+            self.position = pc + self.velocity.scale(self.velocity.length * (1 - u))
 
     def willcollide(self, center, radius):
+        """
+        Will the particle collide with the container if the next step is taken?
+        :param center:
+        :param radius:
+        :return:
+        """
         next_position = self.step()
 
         return len(
@@ -98,5 +114,8 @@ class Particle(object):
         ) > radius
 
     def scale_for_temp(self):
-        self.velocity.vx = self.velocity.vx * self.factor
-        self.velocity.vy = self.velocity.vy * self.factor
+        """
+        Increase the particle velocity by a given factor
+        """
+        self.velocity.vx *= self.factor
+        self.velocity.vy *= self.factor

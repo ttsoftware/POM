@@ -16,7 +16,7 @@ class ContainerVisualiserTest(unittest.TestCase):
 
         container = Container(radius=1000, particle_count=100)
         print container.average_velocity()
-        container.temp_avg_velocity(300)
+        container.temp_avg_velocity(100)
         print container.average_velocity()
         visualiser = ContainerVisualiser(container)
         visualiser.animate(1000)
