@@ -8,6 +8,7 @@ class Particle(object):
     position = None
     velocity = None
     mass = 10 ** -23
+    factor = 1.0
 
     def __init__(self, positionx, positiony, velocityx, velocityy):
         self.position = Vector(vx=positionx, vy=positiony)
@@ -83,6 +84,8 @@ class Particle(object):
             ).scale(self.velocity.length)
 
             self.velocity = v_2
+
+            self.scale_for_temp()
             self.position = pc + self.velocity.scale(1 - u)
 
     def willcollide(self, center, radius):
@@ -93,3 +96,7 @@ class Particle(object):
                    py=(next_position.vx, next_position.vy)
             )
         ) > radius
+
+    def scale_for_temp(self):
+        self.velocity.vx = self.velocity.vx * self.factor
+        self.velocity.vy = self.velocity.vy * self.factor

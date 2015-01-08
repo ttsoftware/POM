@@ -16,7 +16,6 @@ class ContainerTest(unittest.TestCase):
 
                 p.take_step(container.center, container.radius)
 
-
     def test_pressure(self):
         container = Container(radius=10, particle_count=10)
 
@@ -29,3 +28,11 @@ class ContainerTest(unittest.TestCase):
                 p.take_step(container.center, container.radius)
 
             print container.pressure()
+
+    def test_temp_avg_velocity(self):
+        container = Container(radius=10, particle_count=5)
+        print container.average_velocity()
+        factor = container.temp_avg_velocity(10)
+        print container.average_velocity()
+
+        print factor

@@ -34,7 +34,7 @@ class Container(object):
             self.particles += [p]
 
 
-    def averageVelocity(self):
+    def average_velocity(self):
 
         avgVelocity = 0
 
@@ -44,13 +44,25 @@ class Container(object):
 
         return avgVelocity / len(self.particles)
 
-
     def pressure(self):
 
         n = len(self.particles)
-        m = 1
-        v = self.averageVelocity()
+        m = 10 ** -23
+        v = self.average_velocity()
         a = math.pi * (self.radius**2)
 
         pressure = (n * m * (v**2))/(2 * a)
         return pressure
+
+    def temp_avg_velocity(self, temp):
+        m = 10 ** -23
+        kb = 1.380658 * (10**-23)
+        avg_velocity_factor = math.sqrt((temp * 2 * kb) / m)
+        print avg_velocity_factor
+        self.update_velocity(avg_velocity_factor)
+
+    def update_velocity(self, factor):
+
+        for p in self.particles:
+            p.factor = factor
+            p.scale_for_temp()

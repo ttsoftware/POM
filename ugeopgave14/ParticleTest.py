@@ -77,3 +77,5 @@ class DatasetTest(unittest.TestCase):
 
         # we hit the barrier again!
         print p.position, p.velocity
+        p.scale_for_temperature(0.5)
+        print p.position, p.velocity
